@@ -3,9 +3,8 @@
 <#include "header.ftl">
 <body class="index_body">
 <#include "nav.ftl">
-<div class="container" style="margin: 0 auto; max-width: 700px;">
-<#if pageObject??>
-    <#list pageObject.content as article>
+<div class="container" style="margin: 100px auto 10px; max-width: 700px;">
+<#list pageObject.content as article>
         <div class="index_article" id="article_${article.id}">
             <h3>
                 <a href="/article/${article.id}">${article.title}</a>
@@ -21,10 +20,10 @@
             </p>
         </div>
     </#list>
-<#else >
-</#if>
     <ul class="pagination-sm" id="pagination"></ul>
+
 </div>
 <#include "footer.ftl">
+
 </body>
 </html>

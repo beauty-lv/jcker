@@ -1,5 +1,9 @@
 @charset "utf-8";
 
+.jcker-nav {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
 .index_article {
     margin: 0 auto;
     max-width: 700px;
@@ -27,9 +31,9 @@
     background-color: #f7f7f7;
 }
 
-/*h1, h2, h3 {
-    font-size: 18px;
-}*/
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
+}
 
 .page h1 {
     font-size: 21px;
@@ -130,4 +134,13 @@ textarea {
     resize: none;
     border: 0;
     padding: 0 15px 0;
+}
+
+.social{
+    text-align: center;
+    font-size: small;
+}
+.jcker-footer-font{
+    font-size: 13px;
+    color: #5f5f5f;
 }

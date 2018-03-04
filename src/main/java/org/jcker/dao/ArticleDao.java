@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface ArticleDao extends JpaRepository<Article, Integer> {
 
-    @Query(value = "select t.* from t_article t limit 6 ", nativeQuery = true)
+    @Query(value = "select t.* from t_article t order by id DESC limit 5 ", nativeQuery = true)
     List<Article> findRecentArticles();
 
     Page<Article> findAll(Pageable pageable);

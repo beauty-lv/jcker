@@ -2,8 +2,10 @@
 <html lang="en">
 <#include "header.ftl">
 <body>
+<div class="container">
 <#include "nav.ftl">
-<div class="container" style="margin: 0 auto; max-width: 700px;">
+</div>
+<div class="container" style="margin: 100px auto 10px; max-width: 700px;">
     <div class="page page-content" style="margin: 0 auto; max-width: 700px;">
         <h1>
             <a href="/article/${article.id}">${article.title}</a>

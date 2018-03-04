@@ -46,27 +46,28 @@ public class ArticleController {
     @RequestMapping("/")
     public String index(Model model) {
         Sort sort = new Sort(Sort.Direction.DESC, "id");
-        Pageable pageable = new PageRequest(0,10, sort);
-        model.addAttribute("menuList",menuDao.findAll());
+        Pageable pageable = new PageRequest(0, 5, sort);
+        model.addAttribute("menuList", menuDao.findAll());
         model.addAttribute("friendLinkList", friendLinkDao.findAll());
         Page<Article> articlePage = articleDao.findAll(pageable);
         for (Article article :
                 articlePage.getContent()) {
-            article.setPreview(intro(article.getContent(),100));
+            article.setPreview(intro(article.getContent(), 100));
         }
         model.addAttribute("pageObject", articlePage);
         return "index";
     }
+
     @RequestMapping("/page/{page}")
     public String page(Model model, @PathVariable int page) {
         Sort sort = new Sort(Sort.Direction.DESC, "id");
-        Pageable pageable = new PageRequest(page-1,10, sort);
-        model.addAttribute("menuList",menuDao.findAll());
+        Pageable pageable = new PageRequest(page - 1, 5, sort);
+        model.addAttribute("menuList", menuDao.findAll());
         model.addAttribute("friendLinkList", friendLinkDao.findAll());
         Page<Article> articlePage = articleDao.findAll(pageable);
         for (Article article :
                 articlePage.getContent()) {
-            article.setPreview(intro(article.getContent(),100));
+            article.setPreview(intro(article.getContent(), 100));
         }
         model.addAttribute("pageObject", articlePage);
         return "index";
@@ -74,7 +75,7 @@ public class ArticleController {
 
     @RequestMapping("/about")
     public String about(Model model) {
-        model.addAttribute("menuList",menuDao.findAll());
+        model.addAttribute("menuList", menuDao.findAll());
         model.addAttribute("friendLinkList", friendLinkDao.findAll());
         Article article = articleDao.getArticleByTitle("about");
         article.setContent(JckerUtils.mdToHtml(article.getContent()));
@@ -92,11 +93,12 @@ public class ArticleController {
             article.setCreateDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         }
         articleDao.save(article);
-        model.addAttribute("menuList",menuDao.findAll());
+        model.addAttribute("menuList", menuDao.findAll());
         model.addAttribute("articleList", articleDao.findAll());
         model.addAttribute("recent_articles", articleDao.findAll());
         return "dashboard";
     }
+
     @RequestMapping("/admin/edit_article/{id}")
     public String edit(@PathVariable int id, Model model) {
         Article article = articleDao.findOne(id);
@@ -106,17 +108,16 @@ public class ArticleController {
     }
 
     @RequestMapping("/article/{id}")
-    public String view (@PathVariable int id, Model model)  throws Exception {
+    public String view(@PathVariable int id, Model model) throws Exception {
 
         Article article = articleDao.findOne(id);
         System.out.println("article = " + article);
         article.setContent(JckerUtils.mdToHtml(article.getContent()));
 
-        List<Article> articleList = articleDao.findRecentArticles();
-
         List<Comment> commentList = commentDao.findAllByArticleId(id);
 
-        model.addAttribute("recent_articles", articleList);
+        model.addAttribute("recentArticles", articleDao.findRecentArticles());
+        model.addAttribute("menuList", menuDao.findAll());
         model.addAttribute("article", article);
         model.addAttribute("commentList", commentList);
         return "page";
@@ -140,6 +141,7 @@ public class ArticleController {
 
     /**
      * 查询分类下的文章
+     *
      * @param name 分类名称
      * @return
      */

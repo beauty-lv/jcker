@@ -1,40 +1,44 @@
-<footer id="footer" class="footer">
-    <div>
-        <hr>
-        <div class="tooter-social" STYLE="text-align: center">
-            <a class="social rss" target="blank" href="/feed">RSS</a>&nbsp;&nbsp;&nbsp;
-            <a class="social zhihu" target="blank" href="https://www.zhihu.com/people/ZHIHU">知乎</a>&nbsp;&nbsp;
-            <a class="social github" target="blank" href="https://github.com/jckerorg">Github</a>&nbsp;&nbsp;
-            <a class="social twitter" target="blank" href="https://twitter.com/helloalanturing">Twitter</a>&nbsp;&nbsp;
-            <a class="social csdn" target="blank" href="http://blog.csdn.net/u012137018">CSDN</a>
-        </div>
-        <hr>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 hidden-sm-down">
-                    <div><a href="/" target="_blank"><img class="img-fluid" src="../images/logo.png"></a></div>
-                    <div>
-                        <p>内心强大到混蛋,让优秀成为一种习惯</p>
-                    </div>
-                    <p style="margin-bottom: 0;">Powered by <a href="https://www.github.com/jckerorg">JCKER</a></p>
-                    <p style="margin-bottom: 0;">Copyright 2016 <a href="https://www.github.com/jckerorg">JCKER.ORG</a>
-                    </p>
+<footer id="footer" class="footer bg-white jcker-footer-font">
+    <hr>
+    <div class="social">
+        <a class="social rss" target="blank" href="/feed">RSS</a>&nbsp;&nbsp;&nbsp;
+        <a class="social zhihu" target="blank" href="https://www.zhihu.com/people/jcker.org">知乎</a>&nbsp;&nbsp;
+        <a class="social github" target="blank" href="https://github.com/jckerorg">Github</a>&nbsp;&nbsp;
+        <a class="social twitter" target="blank" href="https://twitter.com/helloalanturing">Twitter</a>&nbsp;&nbsp;
+        <a class="social csdn" target="blank" href="http://blog.csdn.net/u012137018">CSDN</a>
+    </div>
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 hidden-sm-down">
+                <div><a href="/" target="_blank"><img class="img-fluid" style="width: 150px;height: 35px;" src="../images/logo.png"></a></div>
+                <div>
+                    <p>内心强大到混蛋,让优秀成为一种习惯</p>
                 </div>
-                <div class="col-md-4 hidden-sm-down">
+                <p style="margin-bottom: 0;">Powered by <a href="https://www.github.com/jckerorg">jcker</a></p>
+                <p style="margin-bottom: 0;">&copy; 2018 <a href="/">jcker.org</a>
+                </p>
+            </div>
+            <div class="col-md-4 hidden-sm-down">
+                <#if friendLinkList??>
                     <label>友情链接</label>
                     <ul id="friend_links" class="list-group" style="list-style: none;">
-                    <#if friendLinkList??>
-                        <#list friendLinkList as friendLink>
-                            <li id="${friendLink.id}"><a href="${friendLink.link}">${friendLink.name}</a></li>
-                        </#list>
-                    <#else >
-                    </#if>
+                    <#list friendLinkList as friendLink>
+                        <li id="${friendLink.id}"><a href="${friendLink.link}">${friendLink.name}</a></li>
+                    </#list>
                     </ul>
-                </div>
-                <div class="col-md-4 hidden-sm-down">
-                    欢迎关注微信公众号：
-                    <img class="img-fluid" src="/images/wechat_qrcode.jpg" style="width: 155px;height: 155px;">
-                </div>
+                <#else >
+                    <label>最新博客</label>
+                    <ul id="recent_articles" class="list-group list-inline" style="list-style: none;">
+                        <#list recentArticles as article>
+                            <li id="article_${article.id}"><a href="/article/${article.id}">${article.title}</a></li>
+                        </#list>
+                    </ul>
+                </#if>
+            </div>
+            <div class="col-md-4 hidden-sm-down">
+                欢迎关注微信公众号：
+                <img class="img-fluid" src="/images/wechat_qrcode.jpg" style="width: 155px;height: 155px;">
             </div>
         </div>
     </div>
@@ -43,6 +47,7 @@
 <script src="/js/jquery.min.js"></script>
 <script src="/highlight/js/highlight.pack.js"></script>
 <script src="/js/tether.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="/js/datatables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/jquery-form/form@4.2.2/dist/jquery.form.min.js" integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i" crossorigin="anonymous"></script>
 <script src="/js/bootstrap.min.js"></script>
@@ -58,7 +63,7 @@
     $(function () {
     <#if pageObject??>
         $('#pagination').twbsPagination({
-            startPage: ${pageObject.number},
+            startPage: ${pageObject.number + 1},
             totalPages: ${pageObject.totalPages},
             visiblePages: 3,
             initiateStartPageClick: false,

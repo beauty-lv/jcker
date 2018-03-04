@@ -23,8 +23,8 @@
             <textarea name="content" id="mdeditor" cols="30" rows="30"
                       class="form-control">${article.content}</textarea>
         <#else >
-            <input type="text" name="title" value="" placeholder="标题Topic">
-            <input type="text" name="category" value="" placeholder="标题Topic">
+            <input type="text" name="title" value="" placeholder="标题">
+            <input type="text" name="category" value="" placeholder="分类">
             <input type="text" name="tags" id="tags" value="" placeholder="标签">
             <input type="submit" value="Save">
             <textarea name="content" id="mdeditor" cols="30" rows="30"
